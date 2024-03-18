@@ -1,0 +1,79 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    image: console-game
+    container_name: console-game
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+    working_dir: /var/www/console-game
+    volumes:
+      - .:/var/www/console-game
+      - ./storage/php.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - console-game
+
+  webserver:
+    image: nginx:alpine
+    container_name: nginx-console-game
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "2022:80"
+    volumes:
+      - .:/var/www/console-game
+      - ./storage/:/etc/nginx/conf.d/
+    networks:
+      - console-game
+
+  db:
+    image: mysql:5.7
+    container_name: db-console-game
+    restart: always
+    tty: true
+    ports:
+      - "20222:3306"
+    volumes:
+      - lbdata:/var/lib/mysql
+    environment:
+      MYSQL_PASSWORD: console-game
+      MYSQL_ROOT_PASSWORD: console-game
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - console-game
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma-console-game
+    links:
+      - db
+    restart: always
+    ports:
+      - "7000:80"
+    networks:
+      - console-game
+
+  nodejs:
+    image: node:alpine
+    container_name: node-consele-game
+    restart: unless-stopped
+    tty: true
+    ports:
+      - 3001:3000
+    networks:
+      - console-game 
+    command: npm run dev
+
+#NETWORKS
+networks:
+  console-game:
+    driver: bridge
+
+#VOLUMES
+volumes:
+  lbdata:
+    driver: local
