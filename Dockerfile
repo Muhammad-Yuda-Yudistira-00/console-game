@@ -18,7 +18,8 @@ unzip \
 git \
 curl \
 libzip-dev \
-zip
+zip \
+npm
 
 RUN apt clean && rm -rf /var/lib/apt/lists/*
 
