@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer base {
+
+	/* Mozilla Firefox */
+	* {
+	  scrollbar-width: thin;
+	  scrollbar-color: #fb923c #fff;
+	}
+
+	/*	Chrome, Safari */
+	::-webkit-scrollbar {
+      width: 4px; /* Lebar scrollbar */
+      height: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: black; /* Warna latar belakang scrollbar */
+    }
+
+    ::-webkit-scrollbar-thumb {
+      @apply bg-yellow-700; /* Warna thumb scrollbar */
+      border-radius: 6px; /* Mengatur border radius thumb */
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555; /* Warna thumb scrollbar saat dihover */
+    }
+}

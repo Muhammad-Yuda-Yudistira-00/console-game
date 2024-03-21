@@ -1,0 +1,14 @@
+@font-face {
+	font-family: "Ojuju";
+	src: url('../../public/Fonts/Ojuju/static/Ojuju-Regular.ttf') format(truetype);
+}
+
+@font-face {
+	font-family: 'Foldit';
+	src: url('../../public/Fonts/Foldit/Foldit-VariableFont_wght.ttf') format(truetype);
+}
+
+@font-face {
+	font-family: 'Rubik Marker Hatch';
+	src: url('../../public/Fonts/Rubik_Marker_Hatch/RubikMarkerHatch-Regular.ttf') format(truetype);
+}
